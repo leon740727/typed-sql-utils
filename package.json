@@ -1,0 +1,19 @@
+{
+  "name": "typed-sql-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dst/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/ramda": "^0.27.61",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1",
+    "type-schema": "git://github.com/leon740727/type-schema.git#semver:~0.0.1"
+  }
+}

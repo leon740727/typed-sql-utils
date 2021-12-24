@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outDir": "./dst/",
+        "declaration": true,
+        "noImplicitAny": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "module": "commonjs",
+        "target": "es2019",
+        "jsx": "react",
+    },
+    "exclude": [
+        "dst",
+        "node_modules",
+    ],
+}
