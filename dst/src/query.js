@@ -69,10 +69,18 @@ class Query {
         return result;
     }
     resolve() {
-        return {
-            sql: `(${this.conditions.map(cond => cond.sql).join(' and ')})`,
-            parameters: this.conditions.map(cond => cond.parameters).reduce((acc, i) => acc.concat(i), []),
-        };
+        if (this.conditions.length === 0) {
+            return {
+                sql: '(1 = 1)',
+                parameters: [],
+            };
+        }
+        else {
+            return {
+                sql: `(${this.conditions.map(cond => cond.sql).join(' and ')})`,
+                parameters: this.conditions.map(cond => cond.parameters).reduce((acc, i) => acc.concat(i), []),
+            };
+        }
     }
 }
 exports.Query = Query;
