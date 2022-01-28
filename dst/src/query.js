@@ -49,7 +49,7 @@ class QueryList {
     }
 }
 class Query {
-    constructor(conditions) {
+    constructor(conditions = []) {
         this.conditions = conditions;
     }
     static and(queries) {

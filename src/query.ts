@@ -56,7 +56,7 @@ class QueryList {
 }
 
 export abstract class Query {
-    constructor (protected conditions: condition[]) {}
+    constructor (protected conditions: condition[] = []) {}
 
     static and (queries: (Query | QueryList)[]): QueryList {
         return new QueryList('and', queries);

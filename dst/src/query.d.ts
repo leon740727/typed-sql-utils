@@ -19,7 +19,7 @@ declare class QueryList {
 }
 export declare abstract class Query {
     protected conditions: condition[];
-    constructor(conditions: condition[]);
+    constructor(conditions?: condition[]);
     static and(queries: (Query | QueryList)[]): QueryList;
     static or(queries: (Query | QueryList)[]): QueryList;
     abstract clone(): this;
