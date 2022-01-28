@@ -23,6 +23,10 @@ class Schema {
         (0, utils_1.assert)(fieldsMap(this.schema)[field] !== undefined, `${field} not included in ${this.table}`);
         return `${this.table}.${fieldsMap(this.schema)[field]}`;
     }
+    /** 傳回輸出的物件欄位 */
+    fields() {
+        return Object.keys(this.schema.innerSchema);
+    }
     /** 組出 sql fields */
     fieldsSql(fields) {
         return (0, ramda_1.toPairs)(fieldsMap(this.schema))

@@ -64,6 +64,8 @@ console.log(q3.resolve());          // '((person.name like :0) or (person.bday l
 
 console.log(new Query().resolve()); // '(1 = 1)'
 
+console.log(schema.fields());       // ['id', 'name', 'birthDay']
+
 // 組合在一起
 (async () => {
     const conn = {} as any;         // get db connection...

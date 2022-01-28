@@ -32,6 +32,11 @@ export class Schema <schema extends objectSchema, field extends keyof ts.buildTy
         return `${this.table}.${fieldsMap(this.schema)[field]}`;
     }
 
+    /** 傳回輸出的物件欄位 */
+    fields (): field[] {
+        return Object.keys(this.schema.innerSchema) as field[];
+    }
+
     /** 組出 sql fields */
     fieldsSql (fields: field[]) {
         return toPairs(fieldsMap(this.schema))
