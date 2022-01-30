@@ -49,27 +49,39 @@ class Query extends BaseQuery {
 const q1 = new Query()
     .byPartialName('leon')
     .byBornYear(2021);
-console.log(q1.resolve());          // '(person.name like :0 and person.bday like :0)'
+console.log({
+    sql: q1.sql,            // '(person.name like :0 and person.bday like :0)'
+    params: q1.parameters,
+});
 
 const q2 = new Query()
     .byPartialName('leon')
     .not(new Query().byBornYear(2021));
-console.log(q2.resolve());          // '(person.name like :0 and not ((person.bday like :0)))'
+console.log({
+    sql: q2.sql,            // '(person.name like :0 and not ((person.bday like :0)))'
+    params: q2.parameters,
+});
 
 const q3 = Query.or([
     new Query().byPartialName('leon'),
     new Query().byBornYear(2021),
 ]);
-console.log(q3.resolve());          // '((person.name like :0) or (person.bday like :0))'
+console.log({
+    sql: q3.sql,            // '((person.name like :0) or (person.bday like :0))'
+    params: q3.parameters,
+});
 
-console.log(new Query().resolve()); // '(1 = 1)'
+console.log({
+    sql: new Query().sql,   // '(1 = 1)'
+    params: new Query().parameters,
+});
 
 console.log(schema.fields());       // ['id', 'name', 'birthDay']
 
 // 組合在一起
 (async () => {
     const conn = {} as any;         // get db connection...
-    const q = new Query().byPartialName('leon').resolve();
+    const q = new Query().byPartialName('leon');
     const fields = schema.fieldsSql(['id', 'name']);
     const table = schema.table;
     const sql = `select ${fields} from ${table} where ${q.sql}`;

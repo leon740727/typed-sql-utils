@@ -15,7 +15,8 @@ declare class QueryList {
     private cmd;
     private items;
     constructor(cmd: 'and' | 'or', items: (Query | QueryList)[]);
-    resolve(): condition;
+    get sql(): string;
+    get parameters(): unknown[];
 }
 export declare abstract class Query {
     protected conditions: condition[];
@@ -23,7 +24,8 @@ export declare abstract class Query {
     static and(queries: (Query | QueryList)[]): QueryList;
     static or(queries: (Query | QueryList)[]): QueryList;
     abstract _clone(): this;
+    get sql(): string;
+    get parameters(): unknown[];
     not(query: Query): this;
-    resolve(): condition;
 }
 export {};

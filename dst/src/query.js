@@ -40,12 +40,12 @@ class QueryList {
         this.cmd = cmd;
         this.items = items;
     }
-    resolve() {
-        const conditions = this.items.map(i => i.resolve());
-        return {
-            sql: `(${conditions.map(sql => sql.sql).join(` ${this.cmd} `)})`,
-            parameters: conditions.reduce((acc, i) => acc.concat(i.parameters), []),
-        };
+    get sql() {
+        const s = this.items.map(i => i.sql).join(` ${this.cmd} `);
+        return `(${s})`; // 整個 query list 是一整組，要跟其他的 query 區分開來
+    }
+    get parameters() {
+        return this.items.map(i => i.parameters).flat();
     }
 }
 class Query {
@@ -58,29 +58,29 @@ class Query {
     static or(queries) {
         return new QueryList('or', queries);
     }
-    not(query) {
-        const sql = query.resolve();
-        const sql2 = {
-            sql: `not (${sql.sql})`,
-            parameters: sql.parameters,
-        };
-        const result = this._clone();
-        result.conditions = result.conditions.concat([sql2]);
-        return result;
-    }
-    resolve() {
+    get sql() {
         if (this.conditions.length === 0) {
-            return {
-                sql: '(1 = 1)',
-                parameters: [],
-            };
+            return '(1 = 1)';
         }
         else {
-            return {
-                sql: `(${this.conditions.map(cond => cond.sql).join(' and ')})`,
-                parameters: this.conditions.map(cond => cond.parameters).reduce((acc, i) => acc.concat(i), []),
-            };
+            return `(${this.conditions.map(cond => cond.sql).join(' and ')})`;
         }
+    }
+    get parameters() {
+        if (this.conditions.length === 0) {
+            return [];
+        }
+        else {
+            return this.conditions.map(cond => cond.parameters).flat();
+        }
+    }
+    not(query) {
+        const result = this._clone();
+        result.conditions = result.conditions.concat([{
+                sql: `not (${query.sql})`,
+                parameters: query.parameters,
+            }]);
+        return result;
     }
 }
 exports.Query = Query;
