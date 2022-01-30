@@ -22,7 +22,7 @@ export declare abstract class Query {
     constructor(conditions?: condition[]);
     static and(queries: (Query | QueryList)[]): QueryList;
     static or(queries: (Query | QueryList)[]): QueryList;
-    abstract clone(): this;
+    abstract _clone(): this;
     not(query: Query): this;
     resolve(): condition;
 }

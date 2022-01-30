@@ -28,7 +28,7 @@ const schema = new Schema('person', dataSchema, fromRecord);
 
 class Query extends BaseQuery {
     // 每個子類別都要實作這個函式
-    clone (): this {
+    _clone (): this {
         return new Query(this.conditions) as this;
     }
 
@@ -81,5 +81,6 @@ console.log(schema.fields());       // ['id', 'name', 'birthDay']
     ];
     // persons = [{ id: '111', name: 'leon', birthDay: undefined }]
     const persons = records.map(rec => schema.parse(rec, ['id', 'name']));
+    console.log(persons);
 })();
 ```

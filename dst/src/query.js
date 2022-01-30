@@ -64,7 +64,7 @@ class Query {
             sql: `not (${sql.sql})`,
             parameters: sql.parameters,
         };
-        const result = this.clone();
+        const result = this._clone();
         result.conditions = result.conditions.concat([sql2]);
         return result;
     }

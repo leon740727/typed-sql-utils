@@ -66,7 +66,7 @@ export abstract class Query {
         return new QueryList('or', queries);
     }
 
-    abstract clone (): this;
+    abstract _clone (): this;
 
     not (query: Query): this {
         const sql = query.resolve();
@@ -74,7 +74,7 @@ export abstract class Query {
             sql: `not (${sql.sql})`,
             parameters: sql.parameters,
         }
-        const result = this.clone();
+        const result = this._clone();
         result.conditions = result.conditions.concat([sql2]);
         return result;
     }
