@@ -1,6 +1,6 @@
 {
   "name": "typed-sql-utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "dst/index.js",
   "scripts": {
@@ -14,6 +14,6 @@
   },
   "dependencies": {
     "ramda": "^0.27.1",
-    "type-schema": "git://github.com/leon740727/type-schema.git#semver:~0.0.1"
+    "type-schema": "https://github.com/leon740727/type-schema.git#semver:~0.0.1"
   }
 }
